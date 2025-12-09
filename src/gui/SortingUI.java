@@ -16,12 +16,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Arrays;
 
-/**
- * SortingUI - Final Version
- * Algoritmalar ve Veri Yapıları Test Arayüzü.
- * Gönderilen Data Structure kodlarına (SinglyLinkedList, DynamicArray, Heap, Randomgenerator)
- * tam uyumlu olacak şekilde butonlar ve girdiler düzenlenmiştir.
- */
+
 public class SortingUI extends JFrame {
 
     // --- GENEL BİLEŞENLER ---
@@ -68,9 +63,9 @@ public class SortingUI extends JFrame {
         setVisible(true);
     }
 
-    // =================================================================================
-    // ----------------------- 1. ALGORİTMALAR PANELİ (Değişmedi) ----------------------
-    // =================================================================================
+    
+    // -----------------------  ALGORİTMALAR PANELİ  ----------------------
+    
     private JPanel createAlgorithmsPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -119,9 +114,9 @@ public class SortingUI extends JFrame {
         return panel;
     }
 
-    // =================================================================================
-    // ----------------------- 2. VERİ YAPILARI PANELİ -------------------
-    // =================================================================================
+    
+    // -----------------------  VERİ YAPILARI PANELİ -------------------
+    
     private JPanel createDataStructuresPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -162,13 +157,14 @@ public class SortingUI extends JFrame {
     }
 
     // --- LinkedList Kontrolleri ---
+
     // --- 2.1 LinkedList Kontrolleri ---
     private JPanel createLinkedListControls() {
         // 1. Ana Panel 
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         // 2. Satırları tutacak olan iç panel (Grid yapısı burada)
-        
+
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5)); 
 
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -198,10 +194,12 @@ public class SortingUI extends JFrame {
         controlsHolder.add(row1);
         controlsHolder.add(row2);
 
+
         // 3. Tutucuyu ana panelin TEPESİNE ekle 
+
         mainPanel.add(controlsHolder, BorderLayout.NORTH);
 
-        // -- Aksiyonlar (Değişmedi) --
+        // -- Aksiyonlar --
         btnAddFirst.addActionListener(e -> {
             try {
                 int val = Integer.parseInt(tfInput.getText());
@@ -250,10 +248,11 @@ public class SortingUI extends JFrame {
         return mainPanel;
     }
 
+    // ---  Dynamic Array Kontrolleri ---
     
-    // --- 2.2 Dynamic Array Kontrolleri ---
+
     private JPanel createDynamicArrayControls() {
-        // Ana Panel (Tepeye sabitlemek için)
+        // Ana Panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         // İç tutucu
