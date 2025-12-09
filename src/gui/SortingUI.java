@@ -162,13 +162,13 @@ public class SortingUI extends JFrame {
     }
 
     // --- LinkedList Kontrolleri ---
-    // --- 2.1 LinkedList Kontrolleri (BOŞLUK SORUNU GİDERİLDİ) ---
+    // --- 2.1 LinkedList Kontrolleri ---
     private JPanel createLinkedListControls() {
-        // 1. Ana Panel (BorderLayout kullanıyoruz ki tepeye sabitleyebilelim)
+        // 1. Ana Panel 
         JPanel mainPanel = new JPanel(new BorderLayout());
         
         // 2. Satırları tutacak olan iç panel (Grid yapısı burada)
-        // Vgap: 5 diyerek satırlar arasına sadece 5 piksellik minik bir boşluk koyduk
+        
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5)); 
 
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -198,7 +198,7 @@ public class SortingUI extends JFrame {
         controlsHolder.add(row1);
         controlsHolder.add(row2);
 
-        // 3. Tutucuyu ana panelin TEPESİNE ekle (İşte boşluğu silen sihir burası)
+        // 3. Tutucuyu ana panelin TEPESİNE ekle 
         mainPanel.add(controlsHolder, BorderLayout.NORTH);
 
         // -- Aksiyonlar (Değişmedi) --
@@ -250,13 +250,13 @@ public class SortingUI extends JFrame {
         return mainPanel;
     }
 
-    // --- 2.2 Dynamic Array Kontrolleri (BOŞLUK DÜZELTİLDİ) ---
-    // --- 2.2 Dynamic Array Kontrolleri (BOŞLUK SORUNU GİDERİLDİ) ---
+    
+    // --- 2.2 Dynamic Array Kontrolleri ---
     private JPanel createDynamicArrayControls() {
         // Ana Panel (Tepeye sabitlemek için)
         JPanel mainPanel = new JPanel(new BorderLayout());
         
-        // İç tutucu (Satırlar arası 5px boşluk)
+        // İç tutucu
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5));
 
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -404,6 +404,7 @@ public class SortingUI extends JFrame {
 
     // === CHART DARK BACKGROUND ===
     lineChart.setBackgroundPaint(new Color(30, 30, 30));
+    lineChart.getTitle().setPaint(Color.WHITE);
 
     CategoryPlot plot = lineChart.getCategoryPlot();
     
