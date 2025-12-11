@@ -80,6 +80,7 @@ public class Main {
 
         csv.close();     // close the CSV file
 
+        //Linked List
         System.out.println("\n~Data Structures~\n");
         System.out.println("\n--Linked List--\n");
 

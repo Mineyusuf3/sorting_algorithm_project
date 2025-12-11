@@ -19,22 +19,22 @@ import java.util.Arrays;
 
 public class SortingUI extends JFrame {
 
-    // --- GENEL BİLEŞENLER ---
+    
     private JTabbedPane tabbedPane;
 
-    // --- 1. ALGORİTMA SEKMESİ ---
+    
     private DefaultCategoryDataset dataset;
     private JTextArea algoLogArea;
     private JCheckBox chkBubble, chkMerge, chkQuick, chkHeap, chkSelection;
     private JButton btnRunSelected;
     private ChartPanel chartPanel;
 
-    // --- 2. VERİ YAPILARI SEKMESİ ---
+    
     private JComboBox<String> dsSelector;
     private JPanel dsInteractionPanel;
     private JTextArea dsLogArea;
     
-    // Nesneler
+    
     private SinglyLinkedList myLinkedList;
     private Heap myHeap;
     private DynamicArray myDynamicArray;
@@ -46,13 +46,11 @@ public class SortingUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         
-        // Nesneleri başlat
         myLinkedList = new SinglyLinkedList();
         myHeap = new Heap(20); 
-        myDynamicArray = new DynamicArray(5);
+        myDynamicArray = new DynamicArray(1);
         myRandomGen = new Randomgenerator(571);
 
-        // Sekmeli yapı
         tabbedPane = new JTabbedPane();
         tabbedPane.setFont(new Font("Arial", Font.BOLD, 14));
 
@@ -64,7 +62,7 @@ public class SortingUI extends JFrame {
     }
 
     
-    // -----------------------  ALGORİTMALAR PANELİ  ----------------------
+    // -----------------------  ALGORİTHMS PANEL  ----------------------
     
     private JPanel createAlgorithmsPanel() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -75,6 +73,7 @@ public class SortingUI extends JFrame {
 
         JLabel lblSelect = new JLabel("Select Algorithms:"); 
         lblSelect.setFont(new Font("Arial", Font.BOLD, 14));
+
         controlPanel.add(lblSelect);
         controlPanel.add(Box.createVerticalStrut(10));
 
@@ -83,7 +82,6 @@ public class SortingUI extends JFrame {
         chkQuick = new JCheckBox("Quick Sort");
         chkHeap = new JCheckBox("Heap Sort");
         chkSelection = new JCheckBox("Selection Sort");
-
 
 
         controlPanel.add(chkBubble);
@@ -99,11 +97,13 @@ public class SortingUI extends JFrame {
 
         panel.add(controlPanel, BorderLayout.WEST);
 
+        //Graphic
         dataset = new DefaultCategoryDataset();
         JFreeChart chart = createChart(dataset);
         chartPanel = new ChartPanel(chart);
         panel.add(chartPanel, BorderLayout.CENTER);
-
+        
+        //Log
         algoLogArea = new JTextArea(8, 50);
         algoLogArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(algoLogArea);
@@ -115,12 +115,12 @@ public class SortingUI extends JFrame {
     }
 
     
-    // -----------------------  VERİ YAPILARI PANELİ -------------------
+    // -----------------------  DATA STRUCTURES PANEL -------------------
     
     private JPanel createDataStructuresPanel() {
         JPanel panel = new JPanel(new BorderLayout());
 
-        // Seçim Menüsü
+        // Choose Menu
         JPanel topPanel = new JPanel();
         JLabel lblChoose = new JLabel("Select Data Structure: ");
         String[] options = {"LinkedList", "Dynamic Array", "Heap", "Random Generator"};
@@ -129,7 +129,7 @@ public class SortingUI extends JFrame {
         topPanel.add(dsSelector);
         panel.add(topPanel, BorderLayout.NORTH);
 
-        // Değişken Panel (CardLayout)
+        // Middle Panel (CardLayout)
         dsInteractionPanel = new JPanel(new CardLayout());
         
         dsInteractionPanel.add(createLinkedListControls(), "LinkedList");
@@ -139,7 +139,7 @@ public class SortingUI extends JFrame {
 
         panel.add(dsInteractionPanel, BorderLayout.CENTER);
 
-        // Log Alanı
+        //Log
         dsLogArea = new JTextArea(10, 50);
         dsLogArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         dsLogArea.setEditable(false);
@@ -156,14 +156,13 @@ public class SortingUI extends JFrame {
         return panel;
     }
 
-    // --- LinkedList Kontrolleri ---
+    // --- LinkedList ---
 
-    // --- 2.1 LinkedList Kontrolleri ---
     private JPanel createLinkedListControls() {
-        // 1. Ana Panel 
+        // Main Panel 
         JPanel mainPanel = new JPanel(new BorderLayout());
         
-        // 2. Satırları tutacak olan iç panel (Grid yapısı burada)
+        // Inner panel
 
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5)); 
 
@@ -190,16 +189,13 @@ public class SortingUI extends JFrame {
         row2.add(btnEmpty);
         row2.add(btnPrint);
 
-        // Satırları tutucuya ekle
         controlsHolder.add(row1);
         controlsHolder.add(row2);
 
 
-        // 3. Tutucuyu ana panelin TEPESİNE ekle 
-
         mainPanel.add(controlsHolder, BorderLayout.NORTH);
 
-        // -- Aksiyonlar --
+        // -- Actions --
         btnAddFirst.addActionListener(e -> {
             try {
                 int val = Integer.parseInt(tfInput.getText());
@@ -248,14 +244,14 @@ public class SortingUI extends JFrame {
         return mainPanel;
     }
 
-    // ---  Dynamic Array Kontrolleri ---
+    // ---  Dynamic Array ---
     
 
     private JPanel createDynamicArrayControls() {
-        // Ana Panel
+        // Main Panel
         JPanel mainPanel = new JPanel(new BorderLayout());
         
-        // İç tutucu
+        // Inner Panel
         JPanel controlsHolder = new JPanel(new GridLayout(2, 1, 0, 5));
 
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -269,6 +265,7 @@ public class SortingUI extends JFrame {
         JButton btnSet = new JButton("Set (Index, Value)");
         JButton btnRemove = new JButton("Remove (Index)");
         JButton btnSize = new JButton("Size");
+        JButton btnCapacity=new JButton("Capacity");
 
         row1.add(new JLabel("Index:"));
         row1.add(tfIndex);
@@ -281,20 +278,20 @@ public class SortingUI extends JFrame {
         row1.add(btnAdd);
         row2.add(btnGet);
         row2.add(btnSet);
+        row2.add(btnCapacity);
         row1.add(btnRemove);
 
         controlsHolder.add(row1);
         controlsHolder.add(row2);
         
-        // Tepeye sabitle
         mainPanel.add(controlsHolder, BorderLayout.NORTH);
 
-        // -- Aksiyonlar --
+        // -- Actions --
         btnAdd.addActionListener(e -> {
             try {
                 int val = Integer.parseInt(tfValue.getText());
                 myDynamicArray.add(val);
-                dsLogArea.append("Array: Added " + val + ". (New Size: " + myDynamicArray.size() + ")\n");
+                dsLogArea.append("Array: Added " + val + "\n");
                 tfValue.setText("");
             } catch(Exception ex) { dsLogArea.append("Error: Check Value input.\n"); }
         });
@@ -325,6 +322,7 @@ public class SortingUI extends JFrame {
         });
 
         btnSize.addActionListener(e -> dsLogArea.append("Array Current Size: " + myDynamicArray.size() + "\n"));
+        btnCapacity.addActionListener(e -> dsLogArea.append("Array Current Capacity: " + myDynamicArray.capacity() + "\n"));
 
         return mainPanel;
     }
@@ -360,7 +358,7 @@ public class SortingUI extends JFrame {
         return p;
     }
 
-    // --- Random Generator Kontrolleri ---
+    // --- Random Generator ---
     private JPanel createRandomGenControls() {
         JPanel p = new JPanel(new FlowLayout());
         JTextField tfSize = new JTextField("", 5);
@@ -390,7 +388,7 @@ public class SortingUI extends JFrame {
     }
 
     
-    // ----------------------- GRAFİK VE ALGORİTMA TEST MANTIĞI ------------------------
+    // ----------------------- GRAPHIC AND ALGORITHMS TEST LOGIC ------------------------
     
 
     private JFreeChart createChart(DefaultCategoryDataset dataset) {
@@ -407,11 +405,11 @@ public class SortingUI extends JFrame {
 
     CategoryPlot plot = lineChart.getCategoryPlot();
     
-    plot.setBackgroundPaint(new Color(20, 20, 20));   // Grafik içi
-    plot.setDomainGridlinePaint(Color.GRAY);          // X çizgileri
-    plot.setRangeGridlinePaint(Color.GRAY);           // Y çizgileri
+    plot.setBackgroundPaint(new Color(20, 20, 20));   // Graphic
+    plot.setDomainGridlinePaint(Color.GRAY);          // X
+    plot.setRangeGridlinePaint(Color.GRAY);           // Y
 
-    // === EKSEN YAZILARI BEYAZ ===
+    // === WHITE TEXT ===
     plot.getDomainAxis().setLabelPaint(Color.WHITE);
     plot.getRangeAxis().setLabelPaint(Color.WHITE);
     plot.getDomainAxis().setTickLabelPaint(Color.WHITE);
@@ -494,7 +492,7 @@ public class SortingUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        try {
+    try {
         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
             if ("Nimbus".equals(info.getName())) {
                 UIManager.setLookAndFeel(info.getClassName());
@@ -502,7 +500,7 @@ public class SortingUI extends JFrame {
             }
         }
 
-        // === DARK THEME AYARLARI ===
+        // === DARK THEME ===
         UIManager.put("control", new Color(45, 45, 45));
         UIManager.put("info", new Color(60, 63, 65));
         UIManager.put("nimbusBase", new Color(18, 30, 49));
@@ -518,18 +516,11 @@ public class SortingUI extends JFrame {
         UIManager.put("nimbusSelectionBackground", new Color(104, 93, 156));
         UIManager.put("text", Color.WHITE);
 
-    } catch (Exception e) {}
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 
     SwingUtilities.invokeLater(SortingUI::new);
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {}
-        
-        SwingUtilities.invokeLater(SortingUI::new);
-    }
+}
+
 }

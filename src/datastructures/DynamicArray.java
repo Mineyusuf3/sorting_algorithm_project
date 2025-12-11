@@ -45,6 +45,9 @@ public class DynamicArray {
     public int size() {
         return size;  // return current number of elements
     }
+    public int capacity() {
+    return data.length;
+    }
 
     private void ensureCapacity() {
         if (size == data.length) {    // if array is full
